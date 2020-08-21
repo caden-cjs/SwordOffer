@@ -1,7 +1,7 @@
 /*
 @Time : 2020/04/28 19:05
 @Author : caden
-@File : mian.go
+@File : main.go
 @Software: GoLand
 */
 package main

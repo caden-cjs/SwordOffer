@@ -27,23 +27,24 @@ func coinChange(coins []int, amount int) int {
 	myMap := make(map[int]int, 0)
 	var fun func(coins []int, amount int, num int)
 	fun = func(coins []int, amount int, num int) {
-		myMap[amount] = 0
+		_, ok := myMap[amount]
+		if !ok {
+			myMap[amount] = num
+		} else {
+			return
+		}
 		for _, item := range coins {
 			if item == amount {
-				fmt.Printf("遍历次数=%v,result=%v\n", num, result)
+				fmt.Printf("遍历次数=%v,result=%v\n", num+1, result)
 				result = int(math.Min(float64(num+1), float64(result)))
-
 			}
 			am := amount - item
 			if am > 0 {
-				_, ok := myMap[am]
-				if !ok {
-					fun(coins, am, num+1)
-					fmt.Println(myMap)
-				}
+				fun(coins, am, num+1)
 			}
 		}
 	}
 	fun(coins, amount, 0)
+	fmt.Println(myMap)
 	return result
 }
